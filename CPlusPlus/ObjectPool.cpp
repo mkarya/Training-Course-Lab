@@ -1,6 +1,7 @@
 #include <iostream> 
 #include "factoryAbstract.h"
 #include "ObjectPool.h"
+#include <single.h>
 
 using namespace std;
 
