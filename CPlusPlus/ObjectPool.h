@@ -6,12 +6,15 @@
 
 class ObjectPool {
         private:
-                map<stooze& ,bool> pool;
+                stooze *joe[5];
+                stooze *moe[5];
+                stooze *ram[5];
+		bool status[15];
 
         public:
-                //ObjectPool();
+                ObjectPool();
                 stooze & getObject(int xx);
-                int releaseObject(stooze& );
+                int releaseObject(stooze * );
 };
 
 #endif

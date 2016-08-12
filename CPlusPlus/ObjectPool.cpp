@@ -2,32 +2,68 @@
 #include "factoryAbstract.h"
 #include "ObjectPool.h"
 #include <single.h>
+#include <map>
 
 using namespace std;
 
-stooze * ObjectPool::getObject(int xx) {
-	map<stooze *,bool>::iterator it = pool.begin();
-	for (; it!=pool.end(); ++it) {
-		if (it->second == false) {
-			it->second = true;
-			return it->first;
-		}
-		else {
-			cout << "no object in pool, creating one \n";
-			stooze& temp = stooze::make_stooge(xx);
-			pool.insert(temp, true);
-			return temp;
-		}
-	return NULL; //code should never come here 
+ObjectPool::ObjectPool() {
+	for (int i=0; i < 5; i++) {
+		joe[i] = stooze::make_stooge(1);
+	}
+	for (int i=0; i < 5; i++) {
+		moe[i] = stooze::make_stooge(2);
+	}
+	for (int i=0; i < 5; i++) {
+		ram[i] = stooze::make_stooge(3);
+	}
+	for(int i=0;i<15;i++) {
+		status[i] = false;
+	}
 }
 
+stooze * ObjectPool::getObject(int xx) {
+	switch(xx) {
+		case 1:
+			for (int i = 0 ; i < 5; i++ ) {
+				if (status[i] == false) {
+					status[i] == true;
+					return joe[i];
+				}
+				else { cout << "give object is not available, returning null \n" };
+			break;
+		case 2:
+			for (int i = 5 ; i < 10; i++ ) {
+				if (status[i] == false) {
+					status[i] == true;
+					return moe[i-5];
+				}
+				else { cout << "give object is not available, returning null \n" };
+			break;
+		case 3:
+			for (int i = 10 ; i < 15; i++ ) {
+				if (status[i] == false) {
+					status[i - 10] == true;
+					return ram[i -10];
+				}
+				else { cout << "give object is not available, returning null \n" };
+			break;
+
+		default:
+			cout << "wrong entry \n";
+	}
+
+	return NULL;
+}
+		
 
 int ObjectPool::releaseObject(stooze * _ptr) {
-	if (_ptr == NULL) {
-		cout << "trying to release NULL pointer\n"
-		return -1;
+	for (int i = 0 ; i < 5 ; i++ ) {
+		if (joe[i] == _ptr) {
+			status[i] = false;
+		else if(moe[i] == _ptr) {
+			status[i+5] = false;
+		else if(ram[i] == _ptr) {
+			status[i+10] = false;	
 	}
-		
-	pool[_ptr] = false;
-	return 0;
+return;
 }
