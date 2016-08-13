@@ -16,6 +16,8 @@ class moe : public stooze {
 		inline void action() {
 			cout << "roll eyes \n";
 		}
+	moe() { cout << "thanks \n";}
+	 ~moe() { cout << "moe: I am killed now moe\n"; }
 };
 
 class joe : public stooze {
@@ -23,6 +25,8 @@ class joe : public stooze {
 		inline void action() {
 			cout << "raise hand \n";
 		}
+	joe(){}
+	~joe() { cout << "joe:i am on being killed \n";}
 };
 
 class ram : public stooze {
@@ -30,5 +34,7 @@ class ram : public stooze {
 		inline void action() {
 			cout << "raise leg \n";
 		}
+	ram(){}
+	~ram() { cout << "ram: i am on being killed \n";}
 };
 #endif

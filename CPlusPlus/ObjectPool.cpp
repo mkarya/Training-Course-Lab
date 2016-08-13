@@ -9,11 +9,7 @@ using namespace std;
 ObjectPool::ObjectPool() {
 	for (int i=0; i < 5; i++) {
 		joe[i] = stooze::make_stooge(1);
-	}
-	for (int i=0; i < 5; i++) {
 		moe[i] = stooze::make_stooge(2);
-	}
-	for (int i=0; i < 5; i++) {
 		ram[i] = stooze::make_stooge(3);
 	}
 	for(int i=0;i<15;i++) {

@@ -8,6 +8,7 @@ using namespace std;
 int main (void) {
 	int input = 0;
 	vector<stooze *> ll;
+	stooze *_ptr;
 	cout << "enter choice, enter 0 to finish \n";
 	while (true) {
 		cin >> input; 
@@ -26,8 +27,13 @@ int main (void) {
 	}
 
 	vector<stooze *>::iterator it = ll.begin();
-	for (; it != ll.end(); ++it) 
-		(*it)->action();
+	for (; it != ll.end(); ++it) { 
+		 _ptr = *it;
+		_ptr->action();
+	}
+	ll.clear();
+	_ptr->action();
+	delete(_ptr);
 
 	return 0;
 }
