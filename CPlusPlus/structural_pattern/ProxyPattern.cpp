@@ -1,21 +1,21 @@
-#ifndef PROXY_H
-#define PROXY_H 
 #include <iostream>
 #include <string>
+#include "ProxyPattern.h"
+using namespace std;
 
-class real_Image {
-	public:
-		real_Image(const string & filename);
-	
-	
-class Image {
-	private:
-		string filename; 
-		class real_Image * _ptr;
+Image::Image(const string &imageName):filename(imageName) {}
+void Image::draw_image() {
+	_ptr = new real_Image(filename);
+	_ptr->loadImage();
+	delete _ptr;
 
-	public:
-		Image(const string &);
-		void draw_image(const string &);
-};
+}
 
-#endif
+int main(void) {
+	string xx;
+	cout << "name the file to draw -> "; 
+	cin >> xx;
+	Image * im = new Image(xx);
+	im->draw_image();
+}
+
