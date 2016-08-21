@@ -1,7 +1,9 @@
 	.file	"hello-world.c"
 	.section	.rodata
-.L1:
-	.string	"hello, world,mukesh"
+.LC0:
+	.string	"I am good \n"
+.LC1:
+	.string	"hello, world\n"
 	.text
 	.globl	main
 	.type	main, @function
@@ -13,8 +15,16 @@ main:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	movl	$.L1, %edi
-	call	puts
+	movl	$20, %edx
+	movl	$.LC0, %esi
+	movl	$1, %edi
+	call	write
+	movl	$14, %ecx
+	movl	$.LC1, %edx
+	movl	$1, %esi
+	movl	$1, %edi
+	movl	$0, %eax
+	call	syscall
 	movl	$0, %eax
 	popq	%rbp
 	.cfi_def_cfa 7, 8
