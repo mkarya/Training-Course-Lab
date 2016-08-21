@@ -21,6 +21,4 @@ do
   echo "$original_params[1]"
 done
 
-# (Thanks, S.C., for additional clarification.)
-
 exit 0
