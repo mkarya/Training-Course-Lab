@@ -13,8 +13,9 @@ void * sender(void *sock) {
 	char buff[512];
 	int *sock_fd = (int *) sock;
 	while(1) {
-       		printf("Reply : ");
-       		scanf("%s",buff);
+		bzero(buff,512);
+       		printf("<< : ");
+       		fgets(buff,512,stdin);
        		if ((send(*sock_fd,buff,strlen(buff) + 1 ,0) < 0)) 
 			perror("send failed :");
 	}

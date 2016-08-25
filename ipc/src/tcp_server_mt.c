@@ -14,8 +14,11 @@ void * sender(void *sock) {
 	char buff[512];
 	int *sock_fd = (int *) sock;
 	while(1) {
-       		printf("Reply : ");
-       		scanf("%s",buff);
+		bzero(buff,512);
+       		printf("<< : ");
+       		fgets(buff,512,stdin);
+		int len = strlen(buff) + 1;
+		buff[len+1] = '\0';
        		if ((send(*sock_fd,buff,strlen(buff) + 1 ,0) < 0)) 
 			perror("send failed :");
 	}
@@ -39,7 +42,7 @@ void * receiver (void *sock) {
 		}
 		else 
 		{
-			printf("MSG : %s\n", buff);
+			printf(">> : %s\n", buff);
 		}
 
 		memset(buff,0,strlen(buff));
@@ -86,7 +89,7 @@ int main (int argc, char **argv) {
 
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY;
-	server.sin_port = htons(8963);
+	server.sin_port = htons(6410);
 
 	/* bind the socket */
 	if(bind(sock, (struct sockaddr *)&server, sizeof(server))) {

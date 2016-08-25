@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <signal.h>
+#include <pthread.h>
 
 int sock;
 
@@ -13,6 +14,16 @@ void signal_handler(int sig) {
 	close(sock);
 	raise(SIGKILL);
 }
+
+void receive_message(void *_ptr) {
+	memset(buff,0,sizeof(buff));
+	if ((rval = recv(mysock, buff, sizeof(buff),0)) < 0 ) {
+		perror("reading failed on incoming connection");
+	}
+	else if(rval == 0) {
+		printf("client ending connections\n");
+	}
+	else 
 
 
 int main (int argc, char **argv) {
@@ -30,6 +41,7 @@ int main (int argc, char **argv) {
 	int mysock;
 	char buff[1024];
 	int rval;
+	pthread_t send_thread, recev_thread;
 	
 	signal(SIGINT, signal_handler);
 
